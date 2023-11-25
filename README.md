@@ -7,7 +7,7 @@ Home: https://hurl.dev
 
 Package license: Apache-2.0
 
-Summary: Run and test HTTP Requests with plain text and curl
+Summary: Run and Test HTTP Requests with plain text and curl
 
 Development: https://github.com/Orange-OpenSource/hurl
 
