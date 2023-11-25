@@ -1,5 +1,5 @@
 :: libxml Rust crate uses LIBXML2 env var to build.
-set LIBXML2=%BUILD_PREFIX%\Library\lib\libxml2.lib
+set LIBXML2=%PREFIX%\Library\lib\libxml2.lib
 
 :: Check licenses
 cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
