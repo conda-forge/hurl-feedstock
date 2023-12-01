@@ -19,6 +19,7 @@ requirements:
     - pkg-config
     - libxml2
   host:
+    - openssl
     - libxml2
     - libcurl
 
