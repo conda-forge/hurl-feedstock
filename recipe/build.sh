@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # libxml Rust crate uses LIBXML2 env var to build.
 export LIBXML2="${PREFIX}/lib/libxml2${SHLIB_EXT}"
+export PKG_CONFIG_SYSROOT_DIR="${PREFIX}"
 
 # Check licenses
 cargo-bundle-licenses \
