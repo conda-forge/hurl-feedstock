@@ -18,6 +18,8 @@ libcurl:
 - '8'
 libxml2:
 - '2.12'
+openssl:
+- '3'
 rust_compiler:
 - rust
 target_platform:
