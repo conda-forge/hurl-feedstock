@@ -22,6 +22,8 @@ requirements:
     - openssl
     - libxml2
     - libcurl
+  run:
+     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx]
 
 test:
   commands:
