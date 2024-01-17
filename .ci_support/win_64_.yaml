@@ -7,7 +7,9 @@ channel_targets:
 libcurl:
 - '8'
 libxml2:
-- '2.12'
+- '2'
+openssl:
+- '3'
 rust_compiler:
 - rust
 target_platform:

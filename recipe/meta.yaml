@@ -1,4 +1,4 @@
-{% set version = "4.1.0" %}
+{% set version = "4.2.0" %}
 
 package:
   name: hurl
@@ -6,10 +6,10 @@ package:
 
 source:
   url: https://github.com/Orange-OpenSource/hurl/archive/{{ version }}.tar.gz
-  sha256: 3356f64158e6dc5f2e29c37eee80a43332b1734baa7380356affeb5160ffca09
+  sha256: 8ede2b3e9e1e1fb80000362750814b0fd07911506c1ea13e38e6c2fe80f447f0
 
 build:
-  number: 2
+  number: 0
 
 requirements:
   build:
@@ -22,6 +22,8 @@ requirements:
     - openssl
     - libxml2
     - libcurl
+  run:
+     - __osx >={{ MACOSX_DEPLOYMENT_TARGET|default("10.9") }}  # [osx]
 
 test:
   commands:
