@@ -1,4 +1,4 @@
-{% set version = "6.1.0" %}
+{% set version = "6.1.1" %}
 
 package:
   name: hurl
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/Orange-OpenSource/hurl/archive/{{ version }}.tar.gz
-  sha256: 7ac2cca05a3a22cd92bd10b46c39a4277fd64d10ab989e46a2e8aca112d842f0
+  sha256: a1dc597fb3ad14685ace7aed350a12ef657986fa96bc8620062ab940fa2a29e9
 
 build:
   number: 0
