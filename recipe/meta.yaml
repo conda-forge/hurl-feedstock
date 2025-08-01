@@ -7,6 +7,9 @@ package:
 source:
   url: https://github.com/Orange-OpenSource/hurl/archive/{{ version }}.tar.gz
   sha256: 3f505848aabd9eec78360928b0fcbfea237a049b5c8d25b8d9e0aeb3f9d8dfed
+  patches:
+    # Patch for libxml-0.3.6 default_binding.rs <https://github.com/Orange-OpenSource/hurl/issues/4288>
+    - cargo-toml-libxml-0.3.6.patch   # [win]
 
 build:
   number: 0
@@ -18,7 +21,6 @@ requirements:
     - {{ stdlib("c") }}
     - cargo-bundle-licenses
     - pkg-config
-    - libxml2
   host:
     - openssl
     - libxml2
