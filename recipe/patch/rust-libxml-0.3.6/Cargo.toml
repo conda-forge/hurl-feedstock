@@ -1,0 +1,49 @@
+[package]
+name = "libxml"
+version = "0.3.6"
+edition = "2021"
+authors = ["Andreas Franzén <andreas@devil.se>", "Deyan Ginev <deyan.ginev@gmail.com>","Jan Frederik Schaefer <j.schaefer@jacobs-university.de>"]
+description = "A Rust wrapper for libxml2 - the XML C parser and toolkit developed for the Gnome project"
+repository = "https://github.com/KWARC/rust-libxml"
+documentation = "https://kwarc.github.io/rust-libxml/libxml/index.html"
+readme = "README.md"
+license = "MIT"
+keywords = ["xml", "libxml","xpath", "parser", "html"]
+build = "build.rs"
+exclude = [
+  "scripts/*"
+]
+
+[lib]
+name = "libxml"
+
+[dependencies]
+libc = "0.2"
+
+[target.'cfg(all(target_family = "windows", target_env = "msvc"))'.build-dependencies]
+vcpkg = "0.2"
+
+[target.'cfg(all(target_family = "windows", target_env = "gnu"))'.build-dependencies]
+pkg-config = "0.3.2"
+
+[target.'cfg(macos)'.build-dependencies]
+pkg-config = "0.3.2"
+
+[target.'cfg(unix)'.build-dependencies]
+pkg-config = "0.3.2"
+
+[build-dependencies.bindgen]
+version = "0.71"
+features = [
+    "runtime",
+    "which-rustfmt",
+]
+default-features = false
+
+[dev-dependencies]
+rayon = "1.0.0"
+criterion = "0.6.0"
+
+[[bench]]
+name = "parsing_benchmarks"
+harness = false

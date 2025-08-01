@@ -1,0 +1,11 @@
+diff --git a/Cargo.toml b/Cargo.toml
+index 0888144ccd..0ce72b6af0 100644
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -21,3 +21,6 @@ empty_structs_with_brackets = "deny"
+ manual_string_new = "deny"
+ semicolon_if_nothing_returned = "deny"
+ wildcard-imports = "deny"
++
++[patch.crates-io]
++libxml = { path = "patch/rust-libxml-0.3.6" }
