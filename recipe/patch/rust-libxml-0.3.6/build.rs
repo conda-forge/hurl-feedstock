@@ -29,8 +29,9 @@ fn find_libxml2() -> Option<ProbedLib> {
         .file_stem()
         .unwrap()
         .to_string_lossy()
-        .strip_prefix("lib")
-        .unwrap()
+        // Patch for conda forge: libxml binary lib is now `libxml2`
+        // .strip_prefix("lib")
+        // .unwrap()
     );
     println!(
       "cargo:rustc-link-search={}",
