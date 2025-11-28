@@ -1,6 +1,9 @@
 :: libxml Rust crate uses LIBXML2 env var to build.
 set LIBXML2=%PREFIX%\Library\lib\libxml2.lib
 
+:: Patch libxml 0.3.8 default_binding.rs see <https://github.com/KWARC/rust-libxml/issues/179>
+xcopy /E /I /Y "%RECIPE_DIR%\patch\rust-libxml-0.3.8" "%SRC_DIR%\patch\rust-libxml-0.3.8"
+
 :: Check licenses
 cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 
