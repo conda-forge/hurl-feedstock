@@ -755,7 +755,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn fputs(_Buffer: *const ::std::os::raw::c_char, _Stream: *mut FILE)
-    -> ::std::os::raw::c_int;
+  -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
   pub fn fread(
@@ -4151,7 +4151,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlListPushBack(l: xmlListPtr, data: *mut ::std::os::raw::c_void)
-    -> ::std::os::raw::c_int;
+  -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
   pub fn xmlListReverse(l: xmlListPtr);
@@ -5622,7 +5622,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn _wcstold_l(_String: *const wchar_t, _EndPtr: *mut *mut wchar_t, _Locale: _locale_t)
-    -> f64;
+  -> f64;
 }
 unsafe extern "C" {
   pub fn wcstof(_String: *const wchar_t, _EndPtr: *mut *mut wchar_t) -> f32;
@@ -6328,7 +6328,7 @@ const _: () = {
 };
 unsafe extern "C" {
   pub fn _fstat32(_FileHandle: ::std::os::raw::c_int, _Stat: *mut _stat32)
-    -> ::std::os::raw::c_int;
+  -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
   pub fn _fstat32i64(
@@ -6344,7 +6344,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn _fstat64(_FileHandle: ::std::os::raw::c_int, _Stat: *mut _stat64)
-    -> ::std::os::raw::c_int;
+  -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
   pub fn _stat32(
@@ -6745,7 +6745,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlGetEncodingAlias(alias: *const ::std::os::raw::c_char)
-    -> *const ::std::os::raw::c_char;
+  -> *const ::std::os::raw::c_char;
 }
 unsafe extern "C" {
   pub fn xmlCleanupEncodingAliases();
@@ -8418,7 +8418,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlThrDefSubstituteEntitiesDefaultValue(v: ::std::os::raw::c_int)
-    -> ::std::os::raw::c_int;
+  -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
   pub fn xmlKeepBlanksDefault(val: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
@@ -8443,7 +8443,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlThrDefDoValidityCheckingDefaultValue(v: ::std::os::raw::c_int)
-    -> ::std::os::raw::c_int;
+  -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
   pub fn xmlThrDefGetWarningsDefaultValue(v: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
@@ -9384,7 +9384,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlXPathSetContextNode(node: xmlNodePtr, ctx: xmlXPathContextPtr)
-    -> ::std::os::raw::c_int;
+  -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
   pub fn xmlXPathNodeEval(
@@ -9414,7 +9414,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlXPathCtxtCompile(ctxt: xmlXPathContextPtr, str_: *const xmlChar)
-    -> xmlXPathCompExprPtr;
+  -> xmlXPathCompExprPtr;
 }
 unsafe extern "C" {
   pub fn xmlXPathCompiledEval(
@@ -10370,7 +10370,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlNewEntityInputStream(ctxt: xmlParserCtxtPtr, entity: xmlEntityPtr)
-    -> xmlParserInputPtr;
+  -> xmlParserInputPtr;
 }
 unsafe extern "C" {
   pub fn xmlPushInput(ctxt: xmlParserCtxtPtr, input: xmlParserInputPtr) -> ::std::os::raw::c_int;
@@ -12368,7 +12368,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlTextReaderConstString(reader: xmlTextReaderPtr, str_: *const xmlChar)
-    -> *const xmlChar;
+  -> *const xmlChar;
 }
 unsafe extern "C" {
   pub fn xmlTextReaderConstValue(reader: xmlTextReaderPtr) -> *const xmlChar;
@@ -12824,7 +12824,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlSchemaValueAppend(prev: xmlSchemaValPtr, cur: xmlSchemaValPtr)
-    -> ::std::os::raw::c_int;
+  -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
   pub fn xmlSchemaValueGetNext(cur: xmlSchemaValPtr) -> xmlSchemaValPtr;
@@ -12837,7 +12837,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlSchemaNewStringValue(type_: xmlSchemaValType, value: *const xmlChar)
-    -> xmlSchemaValPtr;
+  -> xmlSchemaValPtr;
 }
 unsafe extern "C" {
   pub fn xmlSchemaNewNOTATIONValue(name: *const xmlChar, ns: *const xmlChar) -> xmlSchemaValPtr;
@@ -13208,11 +13208,11 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlUCSIsSupplementaryPrivateUseAreaA(code: ::std::os::raw::c_int)
-    -> ::std::os::raw::c_int;
+  -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
   pub fn xmlUCSIsSupplementaryPrivateUseAreaB(code: ::std::os::raw::c_int)
-    -> ::std::os::raw::c_int;
+  -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
   pub fn xmlUCSIsSyriac(code: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
@@ -13260,7 +13260,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlUCSIsVariationSelectorsSupplement(code: ::std::os::raw::c_int)
-    -> ::std::os::raw::c_int;
+  -> ::std::os::raw::c_int;
 }
 unsafe extern "C" {
   pub fn xmlUCSIsYiRadicals(code: ::std::os::raw::c_int) -> ::std::os::raw::c_int;
@@ -14081,7 +14081,7 @@ unsafe extern "C" {
 }
 unsafe extern "C" {
   pub fn xmlXPathFunctionLookup(ctxt: xmlXPathContextPtr, name: *const xmlChar)
-    -> xmlXPathFunction;
+  -> xmlXPathFunction;
 }
 unsafe extern "C" {
   pub fn xmlXPathFunctionLookupNS(

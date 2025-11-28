@@ -1,4 +1,7 @@
-use std::{env, fs, path::{Path, PathBuf}};
+use std::{
+  env, fs,
+  path::{Path, PathBuf},
+};
 
 struct ProbedLib {
   version: String,
@@ -29,9 +32,8 @@ fn find_libxml2() -> Option<ProbedLib> {
         .file_stem()
         .unwrap()
         .to_string_lossy()
-        // Patch for conda forge: libxml binary lib is now `libxml2`
-        // .strip_prefix("lib")
-        // .unwrap()
+        .strip_prefix("lib")
+        .unwrap()
     );
     println!(
       "cargo:rustc-link-search={}",
@@ -41,7 +43,11 @@ fn find_libxml2() -> Option<ProbedLib> {
     );
     None
   } else {
-    #[cfg(any(target_family = "unix", target_os = "macos", all(target_family="windows", target_env="gnu")))]
+    #[cfg(any(
+      target_family = "unix",
+      target_os = "macos",
+      all(target_family = "windows", target_env = "gnu")
+    ))]
     {
       let lib = pkg_config::Config::new()
         .probe("libxml-2.0")
@@ -49,12 +55,12 @@ fn find_libxml2() -> Option<ProbedLib> {
       return Some(ProbedLib {
         include_paths: lib.include_paths,
         version: lib.version,
-      })
+      });
     }
 
     #[cfg(all(target_family = "windows", target_env = "msvc"))]
     {
-      if let Some(meta) =  vcpkg_dep::vcpkg_find_libxml2() {
+      if let Some(meta) = vcpkg_dep::vcpkg_find_libxml2() {
         return Some(meta);
       } else {
         eprintln!("vcpkg did not succeed in finding libxml2.");
@@ -69,14 +75,15 @@ fn generate_bindings(header_dirs: Vec<PathBuf>, output_path: &Path) {
   let bindings = bindgen::Builder::default()
     .header("src/wrapper.h")
     .opaque_type("max_align_t")
-    // Invalidate build as soon as the wrapper changes
+    // invalidate build as soon as the wrapper changes
     .parse_callbacks(Box::new(bindgen::CargoCallbacks::new()))
     .layout_tests(true)
-    .clang_args(&["-DPKG-CONFIG"])
-    .clang_args(
-      header_dirs.iter()
-        .map(|dir| format!("-I{}", dir.display()))
-    );
+    .clang_args(&[
+      "-DPKG-CONFIG",
+      "-DLIBXML_C14N_ENABLED",
+      "-DLIBXML_OUTPUT_ENABLED",
+    ])
+    .clang_args(header_dirs.iter().map(|dir| format!("-I{}", dir.display())));
   bindings
     .generate()
     .expect("failed to generate bindings with bindgen")
@@ -93,10 +100,13 @@ fn main() {
     // if we could find header files, generate fresh bindings from them
     generate_bindings(probed_lib.include_paths, &bindings_path);
     // and expose the libxml2 version to the code
-    let version_parts: Vec<i32> = probed_lib.version.split('.')
-      .map(|part| part.parse::<i32>().unwrap_or(-1)).collect();
-    let older_than_2_12 = version_parts.len() > 1 && (version_parts[0] < 2 ||
-        version_parts[0] == 2 && version_parts[1] < 12);
+    let version_parts: Vec<i32> = probed_lib
+      .version
+      .split('.')
+      .map(|part| part.parse::<i32>().unwrap_or(-1))
+      .collect();
+    let older_than_2_12 = version_parts.len() > 1
+      && (version_parts[0] < 2 || version_parts[0] == 2 && version_parts[1] < 12);
     println!("cargo::rustc-check-cfg=cfg(libxml_older_than_2_12)");
     if older_than_2_12 {
       println!("cargo::rustc-cfg=libxml_older_than_2_12");
@@ -112,12 +122,21 @@ fn main() {
 mod vcpkg_dep {
   use crate::ProbedLib;
   pub fn vcpkg_find_libxml2() -> Option<ProbedLib> {
-    if let Ok(metadata) = vcpkg::Config::new()
-      .find_package("libxml2") {
-      Some(ProbedLib { version: vcpkg_version(), include_paths: metadata.include_paths })
-    } else {
-      None
+    if let Ok(metadata) = vcpkg::Config::new().find_package("libxml2") {
+      let include_paths = metadata
+        .include_paths
+        .into_iter()
+        .fold(Vec::new(), |mut acc, p| {
+          acc.push(p.join("libxml2"));
+          acc.push(p);
+          acc
+        });
+      return Some(ProbedLib {
+        version: vcpkg_version(),
+        include_paths,
+      });
     }
+    None
   }
 
   fn vcpkg_version() -> String {
@@ -126,7 +145,7 @@ mod vcpkg_dep {
     let mut vcpkg_exe = vcpkg::find_vcpkg_root(&vcpkg::Config::new()).unwrap();
     vcpkg_exe.push("vcpkg.exe");
     let vcpkg_list_libxml2 = std::process::Command::new(vcpkg_exe)
-      .args(["list","libxml2"])
+      .args(["list", "libxml2"])
       .output()
       .expect("vcpkg.exe failed to execute in vcpkg_dep build step");
     if vcpkg_list_libxml2.status.success() {
@@ -136,9 +155,8 @@ mod vcpkg_dep {
           let mut version_piece = line.split("2.");
           version_piece.next();
           if let Some(version_tail) = version_piece.next() {
-            if let Some(version) = version_tail.split(' ').next()
-              .unwrap().split('#').next() {
-                return format!("2.{version}");
+            if let Some(version) = version_tail.split(' ').next().unwrap().split('#').next() {
+              return format!("2.{version}");
             }
           }
         }
