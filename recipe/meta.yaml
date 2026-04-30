@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/Orange-OpenSource/hurl/archive/{{ version }}.tar.gz
-  sha256: 07cd840fed40a79487813eeb05201d5f99a969c3b0c80010230afd33e4ff69bf
+  sha256: d6877cd16109b67a64f8581113c3f061b8759de5577f024b8126cbc5ee393243
 
 build:
   number: 0
