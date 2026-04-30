@@ -7,11 +7,6 @@ package:
 source:
   url: https://github.com/Orange-OpenSource/hurl/archive/{{ version }}.tar.gz
   sha256: 07cd840fed40a79487813eeb05201d5f99a969c3b0c80010230afd33e4ff69bf
-  patches:
-    # Path for downgrading Rust version 1.91.1 to 1.91.0
-    - cargo-toml-rust-version-1.91.0.patch
-    # Patch for libxml-0.3.8 default_binding.rs <https://github.com/Orange-OpenSource/hurl/issues/4288>
-    - cargo-toml-libxml-0.3.8.patch   # [win]
 
 build:
   number: 0
