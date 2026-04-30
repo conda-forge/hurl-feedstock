@@ -20,5 +20,7 @@ openssl:
 - '3.5'
 rust_compiler:
 - rust
+rust_compiler_version:
+- '1.95'
 target_platform:
 - linux-aarch64
