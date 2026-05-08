@@ -9,6 +9,13 @@ cargo-bundle-licenses \
     --output THIRDPARTY.yml
 
 # Build
+
+# rust-lld has unresolved PPC64 relocation handling issues with curl-sys/libcurl
+# on linux-ppc64le; force GNU ld.bfd instead of LLVM lld for linking.
+if [[ "${target_platform}" == "linux-ppc64le" ]]; then
+  export CARGO_TARGET_POWERPC64LE_UNKNOWN_LINUX_GNU_RUSTFLAGS="-C link-arg=-fuse-ld=bfd"
+fi
+
 cargo install --locked --root "$PREFIX" --path packages/hurl
 cargo install --locked --root "$PREFIX" --path packages/hurlfmt
 
