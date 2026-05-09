@@ -32,8 +32,9 @@ fn find_libxml2() -> Option<ProbedLib> {
         .file_stem()
         .unwrap()
         .to_string_lossy()
-        .strip_prefix("lib")
-        .unwrap()
+        // Patch for conda forge: libxml binary lib is now `libxml2`
+        // .strip_prefix("lib")
+        // .unwrap()
     );
     println!(
       "cargo:rustc-link-search={}",
@@ -112,9 +113,22 @@ fn main() {
       println!("cargo::rustc-cfg=libxml_older_than_2_12");
     }
   } else {
-    // otherwise, use the default bindings on platforms where pkg-config isn't available
-    fs::copy(PathBuf::from("src/default_bindings.rs"), bindings_path)
-      .expect("Failed to copy the default bindings to the build directory");
+    // otherwise, use platform-specific default bindings
+    let is_windows = cfg!(target_os = "windows");
+
+    let default_bindings = if is_windows {
+      "src/default_bindings_windows.rs"
+    } else {
+      "src/default_bindings.rs"
+    };
+
+    fs::copy(PathBuf::from(default_bindings), bindings_path)
+        .expect("Failed to copy the default bindings to the build directory");
+
+    // non-Windows default bindings were generated against < 2.12
+    if !is_windows {
+      println!("cargo::rustc-cfg=libxml_older_than_2_12");
+    }
   }
 }
 
