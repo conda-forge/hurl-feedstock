@@ -18,6 +18,9 @@ requirements:
     - {{ stdlib("c") }}
     - cargo-bundle-licenses
     - pkg-config
+    # libxml crate generates its bindings with bindgen (requires libclang).
+    - clang
+    - libclang
   host:
     - openssl
     - libxml2-devel
