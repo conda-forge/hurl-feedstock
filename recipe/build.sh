@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# libxml Rust crate uses LIBXML2 env var to build.
-export LIBXML2="${PREFIX}/lib/libxml2${SHLIB_EXT}"
-export PKG_CONFIG_SYSROOT_DIR="${PREFIX}"
+# libxml Rust crate discovers libxml2 through pkg-config (no LIBXML2 env var).
+export PKG_CONFIG_PATH="${PREFIX}/lib/pkgconfig${PKG_CONFIG_PATH:+:${PKG_CONFIG_PATH}}"
+# Allow the pkg-config Rust crate to work when cross-compiling (osx-arm64, linux-aarch64, ...).
+export PKG_CONFIG_ALLOW_CROSS=1
 
 # Check licenses
 cargo-bundle-licenses \
