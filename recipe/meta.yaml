@@ -7,9 +7,6 @@ package:
 source:
   url: https://github.com/Orange-OpenSource/hurl/archive/{{ version }}.tar.gz
   sha256: 2e45678806a8a1c7307d4b4298b11aab6d947799bdce986c67fd9c693dac98a5
-  patches:
-    # Patch for libxml-0.3.9 default_binding.rs <https://github.com/Orange-OpenSource/hurl/issues/4288>
-    - cargo-toml-libxml-0.3.9.patch   # [win]
 
 build:
   number: 0
