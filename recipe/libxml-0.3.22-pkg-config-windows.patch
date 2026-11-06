@@ -1,0 +1,28 @@
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -154,7 +154,7 @@
+ version = "0.73.1"
+ default-features = false
+ 
+-[target.'cfg(all(target_family = "windows", target_env = "gnu"))'.build-dependencies.pkg-config]
++[target.'cfg(target_family = "windows")'.build-dependencies.pkg-config]
+ version = "0.3.2"
+ 
+ [target.'cfg(all(target_family = "windows", target_env = "msvc"))'.build-dependencies.vcpkg]
+--- a/build.rs
++++ b/build.rs
+@@ -43,10 +43,13 @@
+     );
+     None
+   } else {
++    // Patch for conda-forge: use pkg-config on all Windows targets (including msvc)
++    // so bindings are generated with bindgen against conda's libxml2.
++    // See <https://github.com/KWARC/rust-libxml/issues/179>.
+     #[cfg(any(
+       target_family = "unix",
+       target_os = "macos",
+-      all(target_family = "windows", target_env = "gnu")
++      target_family = "windows"
+     ))]
+     {
+       // Opt-in static link: when LIBXML2_STATIC is set and PKG_CONFIG_PATH points
