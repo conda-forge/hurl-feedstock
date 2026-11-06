@@ -1,5 +1,7 @@
-:: libxml Rust crate uses LIBXML2 env var to build.
-set LIBXML2=%PREFIX%\Library\lib\libxml2.lib
+:: libxml Rust crate (patched, see meta.yaml) discovers libxml2 through pkg-config (no LIBXML2 env var).
+set "PKG_CONFIG_PATH=%LIBRARY_PREFIX%\lib\pkgconfig"
+:: bindgen (used by libxml crate) needs libclang from the build env.
+set "LIBCLANG_PATH=%BUILD_PREFIX%\Library\bin"
 
 :: Check licenses
 cargo-bundle-licenses --format yaml --output THIRDPARTY.yml

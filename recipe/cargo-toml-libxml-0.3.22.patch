@@ -1,0 +1,9 @@
+--- a/Cargo.toml
++++ b/Cargo.toml
+@@ -28,3 +28,6 @@
+ enum_no_repr_variant_discriminant_changed = { level = "allow" }
+ enum_discriminants_undefined_non_unit_variant = { level = "allow" }  # Remove before next minor release
+ 
++
++[patch.crates-io]
++libxml = { path = "patch/rust-libxml-0.3.22" }

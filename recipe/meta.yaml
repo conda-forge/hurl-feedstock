@@ -5,8 +5,18 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/Orange-OpenSource/hurl/archive/{{ version }}.tar.gz
-  sha256: 2e45678806a8a1c7307d4b4298b11aab6d947799bdce986c67fd9c693dac98a5
+  - url: https://github.com/Orange-OpenSource/hurl/archive/{{ version }}.tar.gz
+    sha256: 2e45678806a8a1c7307d4b4298b11aab6d947799bdce986c67fd9c693dac98a5
+    patches:
+      # Use the patched libxml crate below <https://github.com/KWARC/rust-libxml/issues/179>
+      - cargo-toml-libxml-0.3.22.patch  # [win]
+  # libxml crate patched to find libxml2 with pkg-config on Windows msvc (and generate bindings with bindgen).
+  - url: https://crates.io/api/v1/crates/libxml/0.3.22/download  # [win]
+    fn: libxml-0.3.22.tar.gz  # [win]
+    sha256: 1157d8bc7a14d07445541827e7a9c80fc5939718b43a973cf7e666d3ab5035fb  # [win]
+    folder: patch/rust-libxml-0.3.22  # [win]
+    patches:  # [win]
+      - libxml-0.3.22-pkg-config-windows.patch  # [win]
 
 build:
   number: 0
